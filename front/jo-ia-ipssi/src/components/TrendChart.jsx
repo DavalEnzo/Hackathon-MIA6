@@ -1,4 +1,3 @@
-// src/TrendChart.js
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -13,6 +12,7 @@ import {
 } from "chart.js";
 
 ChartJS.register(
+    
   CategoryScale,
   LinearScale,
   PointElement,
@@ -88,6 +88,10 @@ const TrendChart = () => {
       y: {
         beginAtZero: true,
       },
+    },
+    // Ajoutez cette propriété pour changer la police de caractères
+    font: {
+      family: "Paris2024-Variable", // Remplacez 'Arial' par la police de votre choix
     },
   };
 

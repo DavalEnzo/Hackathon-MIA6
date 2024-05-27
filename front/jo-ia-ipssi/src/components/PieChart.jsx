@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+ChartJS.defaults.font.family = "Paris2024-Variable";
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
