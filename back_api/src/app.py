@@ -1,19 +1,27 @@
 from fastapi import FastAPI
-from config.db import check_db_connection
+from fastapi.responses import RedirectResponse
 
-app = FastAPI()
+from routes.index import athletes, db, hosts, medals, results
 
-@app.get("/")
-def read_root():
-    if check_db_connection():
-        return {"message": "Database connection established successfully"}
-    else:
-        return {"message": "Failed to establish database connection"}
-    
-@app.get("/check-db")
-def check_db():
-    return check_db_connection()
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+app = FastAPI(
+    title="Hackathon IPSSI || J.O Paris 2024",
+    description="Plongez dans l'avenir des Jeux Olympiques de Paris 2024",
+    version="1.0.0",
+    contact={
+        "name": "Hackathon-MIA6",
+        "url": "https://github.com/DavalEnzo/Hackathon-MIA6", 
+    }
+)
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
+
+
+app.include_router(athletes, prefix="/athletes", tags=["Athletes"], responses={404: {"description": "Not found"}})
+app.include_router(hosts, prefix="/hosts", tags=["Hosts"], responses={404: {"description": "Not found"}})
+app.include_router(medals, prefix="/medals", tags=["Medals"], responses={404: {"description": "Not found"}})
+app.include_router(results, prefix="/results", tags=["Results"], responses={404: {"description": "Not found"}})
+
+app.include_router(db)
