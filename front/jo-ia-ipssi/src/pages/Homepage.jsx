@@ -9,6 +9,8 @@ import Layout from "../components/Layout";
 export default function Homepage() {
   return (
     <Layout>
+      <ParallaxComponent />
+
       <div className="container">
         <div className="row my-5">
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
@@ -22,7 +24,6 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <ParallaxComponent />
 
       <div className="container">
         <div className="row my-5">
