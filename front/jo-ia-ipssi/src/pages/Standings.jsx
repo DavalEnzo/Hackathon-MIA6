@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import Ranking from "../components/Ranking";
 import RankingChart from "../components/RankingChart";
 
 export default function Standings() {
@@ -10,6 +11,9 @@ export default function Standings() {
 
           <div className="col-12">
             <RankingChart />
+          </div>
+          <div className="col-12">
+            <Ranking />
           </div>
         </div>
       </div>

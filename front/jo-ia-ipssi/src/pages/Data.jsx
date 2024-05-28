@@ -11,6 +11,9 @@ export default function Data() {
           <div className="col-12 mt-5">
             <TableData />
           </div>
+          <div className="col-12 mt-5">
+            <TableData />
+          </div>
         </div>
       </div>
     </Layout>

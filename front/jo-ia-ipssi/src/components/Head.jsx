@@ -6,7 +6,7 @@ import TextHome from "./TextHome";
 function Head() {
   return (
     <>
-      <Navbar expand="sm" id="navbar" className="bg-body-white">
+      <Navbar expand="sm" id="navbar" className="bg-body-white sticky-top">
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="w-100" id="basic-navbar-nav">
@@ -22,6 +22,12 @@ function Head() {
                 href="/olympic-results"
               >
                 Jeu de données
+              </Nav.Link>
+              <Nav.Link
+                className="text-light fs-5 fw-bold"
+                href="/a-propos"
+              >
+              À propos
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
