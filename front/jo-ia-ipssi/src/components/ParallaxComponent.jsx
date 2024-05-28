@@ -9,9 +9,9 @@ const ParallaxComponent = () => {
   return (
     <div>
       <Parallax bgImage={bg_paris} strength={500}>
-        <div style={{ width: "100vh", height: "700px" }}>
+        <div style={{height: "700px", textAlign: "center" }}>
           <h1
-            className="text-center text-light"
+            className="text-light"
             style={{ paddingTop: "200px" }}
           >
             Paris 2024

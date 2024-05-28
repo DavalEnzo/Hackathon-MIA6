@@ -38,7 +38,7 @@ const Ranking = () => {
   const countries = medalData[selectedYear];
 
   return (
-    <div className="col-12 col-sm-6 col-xxl-4 mt-4">
+    <div>
       <div className="text-center mb-3">
         <select
           className="form-select"
