@@ -3,7 +3,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import TextHome from "./TextHome";
 
-
 function Head() {
   return (
     <>
@@ -12,11 +11,17 @@ function Head() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="w-100" id="basic-navbar-nav">
             <Nav>
-              <Nav.Link className="text-light fs-5 fw-bold" href="#home">
+              <Nav.Link className="text-light fs-5 fw-bold" href="/">
                 Dashboard
               </Nav.Link>
-              <Nav.Link className="text-light fs-5 fw-bold" href="#link">
+              <Nav.Link className="text-light fs-5 fw-bold" href="/classements">
                 Classements
+              </Nav.Link>
+              <Nav.Link
+                className="text-light fs-5 fw-bold"
+                href="/olympic-results"
+              >
+                Jeu de données
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

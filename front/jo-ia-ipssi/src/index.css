@@ -2,7 +2,7 @@
   font-family: 'Paris2024-Variable';
   font-style: normal;
   font-weight: 400;
-  src: url('./font/Paris2024Variable.ttf') format('truetype');
+  src: url('./assets/font/Paris2024Variable.ttf') format('truetype');
 }
 
 body {
