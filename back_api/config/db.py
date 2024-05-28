@@ -4,7 +4,6 @@ from sqlalchemy.exc import SQLAlchemyError
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv()
 
 db_user = os.getenv('DB_USERNAME')
@@ -16,7 +15,6 @@ db_name = os.getenv('DB_NAME')
 engine = create_engine(f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}")
 
 con = engine.connect()
-
 
 def check_db_connection():
     try:
