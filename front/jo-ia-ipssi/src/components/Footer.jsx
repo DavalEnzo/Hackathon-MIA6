@@ -10,8 +10,8 @@ const Footer = () => {
             <p>&copy; {new Date().getFullYear()} IPSSI,  Tous droits réservés.</p>
           </Col>
           <Col className="text-center">
-            <a href="/contact" className="text-white m-2">
-              Contact
+            <a href="/a-propos" className="text-white m-2">
+            À propos
             </a>
           </Col>
         </Row>

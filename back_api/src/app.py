@@ -24,4 +24,7 @@ app.include_router(hosts, prefix="/hosts", tags=["Hosts"], responses={404: {"des
 app.include_router(medals, prefix="/medals", tags=["Medals"], responses={404: {"description": "Not found"}})
 app.include_router(results, prefix="/results", tags=["Results"], responses={404: {"description": "Not found"}})
 
+
+
+
 app.include_router(db)
