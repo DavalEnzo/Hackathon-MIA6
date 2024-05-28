@@ -1,8 +1,6 @@
 from fastapi import APIRouter,HTTPException
 from config.db import check_db_connection
 
-
-
 db = APIRouter()
 @db.get("/db")
 def root():
