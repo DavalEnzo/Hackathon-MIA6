@@ -24,8 +24,6 @@ def get_db():
     finally:
         db.close()
         
-        
-
 def check_db_connection():
     try:
         connection = engine.connect()

@@ -1,13 +1,35 @@
+@font-face {
+  font-family: 'Paris2024-Variable';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/font/Paris2024Variable.ttf') format('truetype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Paris2024-Variable'!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#navbar{
+  background-color: #570047!important;
+  color: white!important;
+}
+
+#footer {
+  background-color: #570047!important;
+  color: white!important;
+}
+
+#textHome {
+  background-image: linear-gradient(359deg, rgb(114, 7, 74),rgb(232, 54, 104));
+  text-align: center;
+  color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.navbar-toggler-icon {
+  color: white!important;
 }
