@@ -3,9 +3,7 @@ import RankingChart from "../components/RankingChart";
 import TrendChart from "../components/TrendChart";
 import PieChart from "../components/PieChart";
 import ParallaxComponent from "../components/ParallaxComponent";
-
 import Layout from "../components/Layout";
-import MapPositionTorch from "../components/MapPositionTorch";
 import TextHome from "../components/TextHome";
 
 export default function Homepage() {
