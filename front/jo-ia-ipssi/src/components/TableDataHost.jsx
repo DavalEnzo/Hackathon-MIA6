@@ -82,7 +82,7 @@ export default function TableDataHost() {
           ))}
         </tbody>
       </table>
-      {loading && <div>Loading...</div>}
+      {loading && <div>Chargement...</div>}
     </div>
   );
 }
