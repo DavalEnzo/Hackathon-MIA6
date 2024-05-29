@@ -51,8 +51,8 @@ async def get_medals_by_discipline(discipline_title: str):
     
 """Route Get medals count by country"""
 @medals.get("/count_by_country")
-async def get_medals_count_by_country():
-    medals_list = await get_medal_count_by_country()
+async def get_medals_count_by_country(year: int):
+    medals_list = await get_medal_count_by_country(year)
     try:
         return JSONResponse(content=medals_list)
     except Exception as e:
