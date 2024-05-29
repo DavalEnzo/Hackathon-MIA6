@@ -16,6 +16,9 @@ function Head() {
               <Nav.Link className="text-light fs-5" href="/classements">
                 Classements
               </Nav.Link>
+              <Nav.Link className="text-light fs-5" href="/prediction">
+                Prédictions
+              </Nav.Link>
               <Nav.Link
                 className="text-light fs-5"
                 href="/olympic-results"
@@ -32,7 +35,7 @@ function Head() {
                 className="text-light fs-5"
                 href="/a-propos"
               >
-              À propos
+                À propos
               </Nav.Link>
               <Nav.Link
                 className="text-light fs-5"

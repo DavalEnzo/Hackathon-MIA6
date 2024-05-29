@@ -14,12 +14,12 @@ export default function PredictionPage() {
                     <div className="col-12 mt-5">
                         <RankingChartPrediction />
                     </div>
-
-                    <div className="col-6 mt-5">
+      
+                    <div className="col-12 col-md-6 mt-5">
                         <RankingPrediction />
                     </div>
 
-                    <div className="col-6 mt-5">
+                    <div className="col-12 col-md-6 mt-5">
                         <PieChartPrediction />
                     </div>
                 </div>
