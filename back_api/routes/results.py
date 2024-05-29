@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
-from services.results import top_10_countries_by_year, get_events_by_year, top_10_athletes_by_country
+from services.results import top_10_countries_by_year, get_events_by_year, top_10_athletes_by_country, get_country_medals_by_discipline
 
 results = APIRouter()
 
@@ -29,5 +29,14 @@ async def top_athletes_by_country_y(game_year: int, country_name: str):
     athletes_list = await top_10_athletes_by_country(game_year, country_name)
     try:
         return JSONResponse(content=athletes_list)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+"""Country medals by discipline"""
+@results.get("/country_medals_by_discipline/{country}")
+async def country_medals_by_discipline(country: str):
+    countries_list = await get_country_medals_by_discipline(country)
+    try:
+        return JSONResponse(content=countries_list)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

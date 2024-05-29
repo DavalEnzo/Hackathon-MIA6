@@ -13,11 +13,11 @@ import pandas as pd
 
 def f_prediction():
     try:
-        model = tf.keras.models.load_model('../deep-machine-learning/model/olympic_medal_prediction.h5', compile=False)
-        scaler = joblib.load('../deep-machine-learning/model/olympic_medal_prediction_scaler.pkl')
+        model = tf.keras.models.load_model('./model/olympic_medal_prediction.h5', compile=False)
+        scaler = joblib.load('./model/olympic_medal_prediction_scaler.pkl')
 
         # Chargement des données
-        hist_olympData = pd.read_csv('../deep-machine-learning/data/olympic_data_cleaned.csv')
+        hist_olympData = pd.read_csv('./olympic_data_cleaned.csv')
 
         # Séparation des données avant et après 2020
         bf2020 = hist_olympData[hist_olympData['game_year'] < 2020]
@@ -48,10 +48,10 @@ def f_prediction():
 
         # Résultats de la prédiction
         results_2024 = pd.DataFrame({
-            'Country': jo2024['country_name'],
-            'Predicted Gold': np.abs(np.round(y_pred_2024[:, 0])),
-            'Predicted Silver': np.abs(np.round(y_pred_2024[:, 1])),
-            'Predicted Bronze': np.abs(np.round(y_pred_2024[:, 2]))
+            'country': jo2024['country_name'],
+            'gold': np.abs(np.round(y_pred_2024[:, 0])),
+            'silver': np.abs(np.round(y_pred_2024[:, 1])),
+            'bronze': np.abs(np.round(y_pred_2024[:, 2]))
         })
 
         return results_2024.to_dict(orient='records')

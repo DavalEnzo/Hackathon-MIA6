@@ -4,7 +4,8 @@ numpy==1.26.4
 pandas==2.2.2
 python-dotenv==1.0.1
 SQLAlchemy==2.0.30
-tensorflow==2.16.1
-tensorflow_intel==2.16.1
+tensorflow
+tensorflow-intel
 uvicorn==0.30.0
 PyMySql==1.1.1
+scikit-learn
