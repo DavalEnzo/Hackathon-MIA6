@@ -48,10 +48,10 @@ def f_prediction():
 
         # Résultats de la prédiction
         results_2024 = pd.DataFrame({
-            'Country': jo2024['country_name'],
-            'Predicted Gold': np.abs(np.round(y_pred_2024[:, 0])),
-            'Predicted Silver': np.abs(np.round(y_pred_2024[:, 1])),
-            'Predicted Bronze': np.abs(np.round(y_pred_2024[:, 2]))
+            'country': jo2024['country_name'],
+            'gold': np.abs(np.round(y_pred_2024[:, 0])),
+            'silver': np.abs(np.round(y_pred_2024[:, 1])),
+            'bronze': np.abs(np.round(y_pred_2024[:, 2]))
         })
 
         return results_2024.to_dict(orient='records')
