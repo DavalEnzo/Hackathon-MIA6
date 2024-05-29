@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-from config.db import engine, SessionLocal
+from config.db import SessionLocal
+from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -234,24 +234,25 @@ async def get_medals_by_year():
         session.close()
         
 """Get medal count by country"""
-async def get_medal_count_by_country():
+async def get_medal_count_by_country(game_year: int):
     session = SessionLocal()
     try:
-        query = text("""
-            SELECT 
-                h.game_year,
-                m.country_name,
-                COUNT(*) as medal_count
-            FROM 
-                olympic_medals m
-            JOIN 
-                olympic_hosts h ON m.host_id = h.host_id
-            GROUP BY 
-                h.game_year, m.country_name
-            ORDER BY 
-                h.game_year, m.country_name;
-        """)
-        result = session.execute(query)
+        query = text("""SELECT
+            h.game_year,
+            m.country_name,
+            COUNT(*) as medal_count
+        FROM
+            olympic_medals m
+        JOIN
+            olympic_hosts h ON m.host_id = h.host_id
+        WHERE
+            h.game_year = :game_year
+        GROUP BY
+            h.game_year, m.country_name
+        ORDER BY
+            h.game_year, m.country_name;""")
+        result = session.execute(query, {"game_year": game_year})
+
         column_names = list(result.keys())
         medal_counts = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
         return medal_counts
@@ -276,7 +277,7 @@ async def get_medal_count_by_athlete():
                 GROUP BY 
                     h.game_year, m.athlete_full_name
                 ORDER BY 
-                    h.game_year, m.athlete_full_name;
+                    h.game_year, medal_count DESC;
             """)
             result = session.execute(query)
             column_names = list(result.keys())

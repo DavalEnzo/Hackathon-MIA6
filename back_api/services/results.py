@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-from config.db import engine, SessionLocal
+from config.db import SessionLocal
+from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from decimal import Decimal
@@ -55,6 +55,56 @@ ORDER BY
         raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
     finally:
         session.close()
+
+
+def get_country_medals_by_discipline(country: str = None, year: int = None, discipline: str = None):
+    try:
+        session = SessionLocal()
+        base_query = """
+            SELECT COUNT(*) AS count_medal, medal_type, discipline_title, country_name, game_year 
+            FROM olympic_results 
+            JOIN olympic_hosts h ON olympic_results.slug_game = h.slug_game
+            WHERE medal_type != ''
+        """
+
+        conditions = []
+        params = {}
+
+        if country:
+            conditions.append("country_name = :country")
+            params["country"] = country
+
+        if year:
+            conditions.append("game_year = :year")
+            params["year"] = year
+
+        if discipline:
+            conditions.append("discipline_title = :discipline")
+            params["discipline"] = discipline
+
+        if conditions:
+            base_query += " AND " + " AND ".join(conditions)
+
+        base_query += """
+            GROUP BY country_name, discipline_title 
+            ORDER BY count_medal DESC;
+        """
+
+        query = text(base_query)
+        result = session.execute(query, params)
+        column_names = list(result.keys())
+        countries = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
+        return countries
+    except SQLAlchemyError as e:
+        print(f"Database error: {str(e)}")
+        raise HTTPException(status_code=500,
+                            detail="An error occurred while fetching countries. Please try again later.")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
+    finally:
+        session.close()
+
 
 """Get Events by year"""
 async def get_events_by_year(game_year: int):
@@ -124,9 +174,8 @@ async def top_10_athletes_by_country(game_year: int, country_name: str):
         raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
     finally:
         session.close()
-        
-
-"""Get best comtries by discipline and year"""
+      
+"""Get best countries by discipline and year"""
 async def get_best_countries_by_dis_year(game_year: int):
     try:
         session = SessionLocal()
@@ -184,6 +233,38 @@ async def get_best_countries_by_dis_year(game_year: int):
             {column_names[i]: decimal_to_float(value) for i, value in enumerate(row)}
             for row in result.fetchall()
         ]
+        return countries
+    except SQLAlchemyError as e:
+        print(f"Database error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An error occurred while fetching countries. Please try again later.")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
+    finally:
+        session.close()
+
+"""Get medals by country by year"""
+async def get_medals_by_country_year(year: int):
+    try:
+        session = SessionLocal()
+        query = text("""
+            SELECT 
+                country_name,
+                COUNT(*) AS medal_count
+            FROM 
+                olympic_results r
+            JOIN olympic_hosts h ON r.slug_game = h.slug_game
+            WHERE 
+                game_year = :year
+                AND medal_type IS NOT NULL
+            GROUP BY 
+                country_name
+            ORDER BY 
+                medal_count DESC;
+        """)
+        result = session.execute(query, {"year": year})
+        column_names = list(result.keys())
+        countries = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
         return countries
     except SQLAlchemyError as e:
         print(f"Database error: {str(e)}")
