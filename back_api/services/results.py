@@ -48,6 +48,31 @@ async def top_10_countries_by_year(year: int):
     finally:
         session.close()
 
+async def get_country_medals_by_discipline(country: str):
+    try:
+        session = SessionLocal()
+        query = text("""
+            SELECT COUNT(*) AS count_medal, medal_type, discipline_title, country_name 
+            FROM `olympic_results` 
+            WHERE country_name = :country
+            AND medal_type != ''
+            GROUP BY country_name, discipline_title 
+            ORDER BY count_medal DESC;
+        """)
+        result = session.execute(query, {"country": country})
+        column_names = list(result.keys())
+        countries = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
+        return countries
+    except SQLAlchemyError as e:
+        print(f"Database error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An error occurred while fetching countries. Please try again later.")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
+    finally:
+        session.close()
+
+
 """Get Events by year"""
 async def get_events_by_year(game_year: int):
     try:
