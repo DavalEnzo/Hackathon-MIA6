@@ -277,7 +277,7 @@ async def get_medal_count_by_athlete():
                 GROUP BY 
                     h.game_year, m.athlete_full_name
                 ORDER BY 
-                    h.game_year, m.medal_count DESC;
+                    h.game_year, medal_count DESC;
             """)
             result = session.execute(query)
             column_names = list(result.keys())
