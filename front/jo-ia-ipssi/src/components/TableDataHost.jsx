@@ -16,7 +16,7 @@ export default function TableDataHost() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts?page=${page}&limit=20`
+        `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts/all?page=${page}&limit=20`
       );
       console.log(page)
       setData((prevData) => [...prevData, ...response.data]);
