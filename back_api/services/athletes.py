@@ -80,7 +80,7 @@ async def top_10_athletes_by_year(game_year: int):
                 SELECT 
                     h.game_year,
                     m.athlete_full_name,
-                    COUNT(*) AS medal_count,
+                    COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) AS medal_count,
                     ROW_NUMBER() OVER (PARTITION BY h.game_year ORDER BY COUNT(*) DESC) AS rank
                 FROM 
                     olympic_medals m

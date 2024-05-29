@@ -219,7 +219,11 @@ async def get_medal_id(id: int):
 async def get_medals_by_year():
     try:
         session = SessionLocal()
-        query = text("SELECT year, country, COUNT(*) as medal_count FROM olympic_medals GROUP BY year, country;")
+        query = text("SELECT game_year, country_name, COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) AS medal_count "
+                     "FROM olympic_results r "
+                     "JOIN olympic_hosts ON olympic_hosts.slug_game = r.slug_game "
+                     "GROUP BY country_name, game_year "
+                     "ORDER BY game_year, medal_count desc;")
         result = session.execute(query)
         column_names = list(result.keys())
         medals_by_year = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
@@ -237,20 +241,12 @@ async def get_medals_by_year():
 async def get_medal_count_by_country(game_year: int):
     session = SessionLocal()
     try:
-        query = text("""SELECT
-            h.game_year,
-            m.country_name,
-            COUNT(*) as medal_count
-        FROM
-            olympic_medals m
-        JOIN
-            olympic_hosts h ON m.host_id = h.host_id
-        WHERE
-            h.game_year = :game_year
-        GROUP BY
-            h.game_year, m.country_name
-        ORDER BY
-            h.game_year, m.country_name;""")
+        query = text("""SELECT h.game_year, r.country_name, COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) 
+        FROM olympic_results r JOIN olympic_hosts h ON r.slug_game = h.slug_game 
+        WHERE h.game_year = :game_year 
+        GROUP BY h.game_year, r.country_name 
+        ORDER BY h.game_year, r.country_name;
+    """)
         result = session.execute(query, {"game_year": game_year})
 
         column_names = list(result.keys())
@@ -265,19 +261,12 @@ async def get_medal_count_by_country(game_year: int):
 async def get_medal_count_by_athlete():
         session = SessionLocal()
         try:
-            query = text("""
-                SELECT
-                    h.game_year, 
-                    m.athlete_full_name,
-                    COUNT(*) as medal_count
-                FROM 
-                    olympic_medals m
-                JOIN 
-                    olympic_hosts h ON m.host_id = h.host_id
-                GROUP BY 
-                    h.game_year, m.athlete_full_name
-                ORDER BY 
-                    h.game_year, medal_count DESC;
+            query = text("""SELECT h.game_year, r.athlete_full_name, COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) as medal_count 
+            FROM olympic_results r 
+            JOIN olympic_hosts h ON r.slug_game = h.slug_game 
+            WHERE athlete_full_name != '' 
+            GROUP BY h.game_year, r.athlete_full_name 
+            ORDER BY h.game_year DESC, medal_count DESC;
             """)
             result = session.execute(query)
             column_names = list(result.keys())
@@ -295,9 +284,9 @@ async def get_discipline_most_medals_by_country(country: str):
         query = text("""
             SELECT 
                 discipline_title, 
-                COUNT(*) as medal_count
+                COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) as medal_count
             FROM 
-                olympic_medals
+                olmpic_results r
             WHERE 
                 country_name = :country
             GROUP BY 

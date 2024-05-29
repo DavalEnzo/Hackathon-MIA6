@@ -12,6 +12,8 @@ def decimal_to_float(value):
 
 
 """To 10 contries by year"""
+
+
 async def top_10_countries_by_year(year: int):
     try:
         session = SessionLocal()
@@ -49,7 +51,8 @@ ORDER BY
         return countries
     except SQLAlchemyError as e:
         print(f"Database error: {str(e)}")
-        raise HTTPException(status_code=500, detail="An error occurred while fetching countries. Please try again later.")
+        raise HTTPException(status_code=500,
+                            detail="An error occurred while fetching countries. Please try again later.")
     except Exception as e:
         print(f"Unexpected error: {str(e)}")
         raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
@@ -138,7 +141,7 @@ async def top_10_athletes_by_country(game_year: int, country_name: str):
                 SELECT 
                     h.game_year,
                     m.athlete_full_name,
-                    COUNT(*) AS medal_count,
+                    COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) AS medal_count,
                     ROW_NUMBER() OVER (PARTITION BY h.game_year ORDER BY COUNT(*) DESC) AS rank
                 FROM 
                     olympic_medals m
@@ -250,7 +253,7 @@ async def get_medals_by_country_year(year: int):
         query = text("""
             SELECT 
                 country_name,
-                COUNT(*) AS medal_count
+                COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) AS medal_count
             FROM 
                 olympic_results r
             JOIN olympic_hosts h ON r.slug_game = h.slug_game
