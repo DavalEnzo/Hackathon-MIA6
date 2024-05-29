@@ -13,6 +13,9 @@ function Head() {
               <Nav.Link className="text-light fs-5" href="/">
                 Dashboard
               </Nav.Link>
+              <Nav.Link className="text-light fs-5" href="/prediction">
+                Prédiction
+              </Nav.Link>
               <Nav.Link className="text-light fs-5" href="/classements">
                 Classements
               </Nav.Link>
@@ -32,13 +35,13 @@ function Head() {
                 className="text-light fs-5"
                 href="/a-propos"
               >
-              À propos
+                À propos
               </Nav.Link>
               <Nav.Link
                 className="text-light fs-5"
                 href="/faq"
               >
-             FAQ
+                FAQ
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
