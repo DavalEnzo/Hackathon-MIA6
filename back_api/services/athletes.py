@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-from config.db import engine, SessionLocal
+from config.db import SessionLocal
+from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
