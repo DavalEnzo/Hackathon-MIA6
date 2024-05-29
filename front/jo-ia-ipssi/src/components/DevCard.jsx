@@ -11,7 +11,7 @@ const DevCard = ({ participant }) => {
                 <Card.Title className='text-center'>{participant.nom} {participant.prenom}</Card.Title>
                 <div className='text-center'>
                     <Card.Text>{participant.description}</Card.Text>
-                    <a target='_blank' href={participant.link} style={{color: '#0a66c2'}} className='text-primary fs-2'>
+                    <a target='_blank' rel="noreferrer" href={participant.link} style={{color: '#0a66c2'}} className='text-primary fs-2'>
                         <FontAwesomeIcon icon={faLinkedin} />
                     </a>
                 </div>

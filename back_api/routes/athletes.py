@@ -1,11 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
+
 from services.athletes import f_athletes, get_all, get_athlete_id, get_athlete_name, top_10_athletes_by_year
 
 athletes = APIRouter()
 
 """Route Get 100 first athletes"""
-@athletes.get("/")
+@athletes.get("")
 async def get_athletes():
     athletes_list = await f_athletes()
     try:
@@ -48,9 +49,3 @@ async def get_top_athletes_by_year(game_year: int):
         return JSONResponse(content=athletes_list)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
-    
-
-
-

@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import TextHome from "./TextHome";
 
 function Head() {
   return (
@@ -25,6 +24,12 @@ function Head() {
               </Nav.Link>
               <Nav.Link
                 className="text-light fs-5"
+                href="/position-flamme"
+              >
+                La flamme
+              </Nav.Link>
+              <Nav.Link
+                className="text-light fs-5"
                 href="/a-propos"
               >
               À propos
@@ -33,7 +38,6 @@ function Head() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <TextHome />
     </>
   );
 }
