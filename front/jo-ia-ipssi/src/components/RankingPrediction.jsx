@@ -28,7 +28,7 @@ const RankingPrediction = () => {
 
   return (
     <div>
-      <p className="fs-3 text-center mb-4">Classement des pays par somme de médailles</p>
+      <p className="fs-3 text-center mb-4">Classement des pays par total des médailles</p>
       <div style={{ height: "500px", overflowY: "scroll" }}>
         <ul className="list-group list-group-flush">
           {countries.map((country, index) => (

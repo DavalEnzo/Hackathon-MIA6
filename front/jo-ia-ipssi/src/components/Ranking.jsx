@@ -1,41 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Ranking = () => {
-  const medalData = {
-    2020: [
-      { name: "USA", medals: 10 },
-      { name: "China", medals: 8 },
-      { name: "Japan", medals: 6 },
-      { name: "Germany", medals: 5 },
-      { name: "Russia", medals: 4 },
-      { name: "Australia", medals: 3 },
-      { name: "France", medals: 2 },
-      { name: "Canada", medals: 1 },
-    ],
-    2016: [
-      { name: "USA", medals: 12 },
-      { name: "China", medals: 9 },
-      { name: "Japan", medals: 7 },
-      { name: "Germany", medals: 6 },
-      { name: "Russia", medals: 5 },
-      { name: "Australia", medals: 4 },
-      { name: "France", medals: 3 },
-      { name: "Canada", medals: 2 },
-    ],
-    2012: [
-      { name: "USA", medals: 11 },
-      { name: "China", medals: 10 },
-      { name: "Japan", medals: 8 },
-      { name: "Germany", medals: 7 },
-      { name: "Russia", medals: 6 },
-      { name: "Australia", medals: 5 },
-      { name: "France", medals: 4 },
-      { name: "Canada", medals: 3 },
-    ],
-  };
-
+  const [medalData, setMedalData] = useState({});
+  const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState("2020");
-  const countries = medalData[selectedYear];
+
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        const response = await axios.get("https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts/allYears");
+        const data = response.data;
+        setYears(data);
+        if (data.length > 0) {
+          setSelectedYear(data[0].game_year);
+        
+        }
+      } catch (error) {
+        console.error("Error fetching years:", error);
+      }
+    };
+
+    fetchYears();
+  }, []);
+
+  useEffect(() => {
+    if (selectedYear) {
+      const fetchData = async (year) => {
+        try {
+          const response = await axios.get(
+            `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/results/get_top_countries_by_year/${year}`
+          );
+          setMedalData((prevData) => ({
+            ...prevData,
+            [year]: response.data,
+          }));
+        } catch (error) {
+          console.error("Error fetching medal data:", error);
+        }
+      };
+
+      fetchData(selectedYear);
+    }
+  }, [selectedYear]);
+
+  const countries = medalData[selectedYear] || [];
 
   return (
     <div>
@@ -45,9 +54,11 @@ const Ranking = () => {
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
         >
-          <option value="2020">2020</option>
-          <option value="2016">2016</option>
-          <option value="2012">2012</option>
+          {years.map((year, index) => (
+            <option key={index} value={year.game_year}>
+              {year.game_year}
+            </option>
+          ))}
         </select>
       </div>
       <ul className="list-group list-group-flush">
@@ -56,8 +67,8 @@ const Ranking = () => {
             className="list-group-item justify-content-between d-flex"
             key={index}
           >
-            <div>{country.name}</div>
-            <div>{country.medals}</div>
+            <div>{country.country_name}</div>
+            <div>{country.medal_count}</div>
           </li>
         ))}
       </ul>

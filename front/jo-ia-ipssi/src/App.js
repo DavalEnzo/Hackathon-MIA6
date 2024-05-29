@@ -6,7 +6,6 @@ import AboutPage from "./pages/AboutPage";
 import PositionTorch from "./pages/PositionTorch";
 import PredictionPage from "./pages/PredictionPage";
 import FaqPage from "./pages/FaqPage";
-import PredictionPage from "./pages/PredictionPage";
 
 function App() {
   return (

@@ -1,10 +1,10 @@
 import Ranking from "../components/Ranking";
-import RankingChart from "../components/RankingChart";
 import TrendChart from "../components/TrendChart";
 import PieChart from "../components/PieChart";
 import ParallaxComponent from "../components/ParallaxComponent";
 import Layout from "../components/Layout";
 import TextHome from "../components/TextHome";
+
 
 export default function Homepage() {
   return (
@@ -14,15 +14,14 @@ export default function Homepage() {
       <div className="container">
         <div className="row my-5">
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
+            <p className="text-center fs-5">Classement des pays par total des médailles </p>
+            <Ranking />
+          </div>
+          <div className="col-12 col-sm-6 col-xxl-8 mt-4">
             <Ranking />
           </div>
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-
             <PieChart />
-
           </div>
         </div>
       </div>
@@ -31,12 +30,6 @@ export default function Homepage() {
         <div className="row my-5">
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
             <TrendChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
           </div>
         </div>
       </div>
