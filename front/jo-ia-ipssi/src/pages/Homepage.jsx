@@ -3,14 +3,14 @@ import RankingChart from "../components/RankingChart";
 import TrendChart from "../components/TrendChart";
 import PieChart from "../components/PieChart";
 import ParallaxComponent from "../components/ParallaxComponent";
-
 import Layout from "../components/Layout";
+import TextHome from "../components/TextHome";
 
 export default function Homepage() {
   return (
     <Layout>
+      <TextHome />
       <ParallaxComponent />
-
       <div className="container">
         <div className="row my-5">
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
@@ -20,7 +20,9 @@ export default function Homepage() {
             <RankingChart />
           </div>
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <TrendChart />
+
+            <PieChart />
+
           </div>
         </div>
       </div>
@@ -28,7 +30,7 @@ export default function Homepage() {
       <div className="container">
         <div className="row my-5">
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <PieChart />
+            <TrendChart />
           </div>
           <div className="col-12 col-sm-6 col-xxl-4 mt-4">
             <RankingChart />
