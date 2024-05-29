@@ -1,10 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from config.db import SessionLocal
+from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
-
-from config.db import SessionLocal
-
-hosts = APIRouter()
 
 """Get all hosts"""
 async def get_all(page: int = 1, limit: int = 20):
