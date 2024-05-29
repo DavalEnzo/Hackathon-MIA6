@@ -79,7 +79,7 @@ export default function TableDataAthlete() {
           ))}
         </tbody>
       </table>
-      {loading && <div className="text-center my-2">Loading...</div>}
+      {loading && <div className="text-center my-2">Chargement...</div>}
     </div>
   );
 }

@@ -34,6 +34,12 @@ function Head() {
               >
               À propos
               </Nav.Link>
+              <Nav.Link
+                className="text-light fs-5"
+                href="/faq"
+              >
+             FAQ
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
