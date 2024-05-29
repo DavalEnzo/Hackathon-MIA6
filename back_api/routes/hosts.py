@@ -6,9 +6,9 @@ from services.hosts import get_all, get_host, get_host_slug, get_host_season, ge
 hosts = APIRouter()
 
 """Route Get all hosts"""
-@hosts.get("/")
-async def read_hosts():
-    host_list = await get_all()
+@hosts.get("/all")
+async def read_hosts(page: int = 1, limit: int = 20):
+    host_list = await get_all(page, limit)
     try:
         return host_list
     except Exception as e:
