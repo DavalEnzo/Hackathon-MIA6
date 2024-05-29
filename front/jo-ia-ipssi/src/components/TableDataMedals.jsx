@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useCallback, useRef } from "react";
 
-export default function TableDataAthlete() {
+export default function TableDataMedals() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -16,10 +16,10 @@ export default function TableDataAthlete() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/athletes/all?page=${page}&limit=20`
+        `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/medals/all?page=${page}&limit=20`
       );
       setData((prevData) => [...prevData, ...response.data]);
-      setHasMore(response.data.length > 0);
+      setHasMore(response.data.length > 0); // Assuming the API returns an empty array when there's no more data
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +30,8 @@ export default function TableDataAthlete() {
     const container = tableContainerRef.current;
     if (container) {
       const bottom =
-        Math.round(container.scrollHeight - container.scrollTop) === container.clientHeight;
+        Math.round(container.scrollHeight - container.scrollTop) ===
+        container.clientHeight;
       if (bottom && !loading && hasMore) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -54,11 +55,11 @@ export default function TableDataAthlete() {
       <table className="table">
         <thead>
           <tr>
-            <th>Nom</th>
-            <th>Médailles</th>
-            <th>Année de naissance</th>
-            <th>Premier jeu</th>
-            <th>Participations aux jeux</th>
+            <th>Athlète</th>
+            <th>Pays</th>
+            <th>Discipline</th>
+            <th>Médaille</th>
+            <th>Jeux</th>
             <th>Plus d'infos</th>
           </tr>
         </thead>
@@ -66,10 +67,10 @@ export default function TableDataAthlete() {
           {data.map((item, index) => (
             <tr key={index}>
               <td>{item.athlete_full_name}</td>
-              <td>{item.athlete_medals}</td>
-              <td>{Math.round(item.athlete_year_birth)}</td>
-              <td>{item.first_game}</td>
-              <td>{item.games_participations}</td>
+              <td>{item.country_name}</td>
+              <td>{item.discipline_title}</td>
+              <td>{item.medal_type}</td>
+              <td>{item.slug_game}</td>
               <td>
                 <a target="_blank" rel="noreferrer" href={item.athlete_url}>
                   Voir plus
