@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
-from services.hosts import get_all, get_host, get_host_slug, get_host_season, get_host_year
+from services.hosts import get_all, get_host, get_host_slug, get_host_season, get_host_year, get_year
 
 hosts = APIRouter()
 
@@ -11,6 +11,15 @@ async def read_hosts(page: int = 1, limit: int = 20):
     host_list = await get_all(page, limit)
     try:
         return host_list
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+"""Route Get all years"""
+@hosts.get("/allYears")
+async def read_host_all_year():
+    year = await get_year()
+    try:
+        return JSONResponse(content=year)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
