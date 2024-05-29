@@ -31,7 +31,7 @@ export default function TableDataHost() {
     const container = tableContainerRef.current;
     if (container) {
       const bottom =
-        container.scrollHeight - container.scrollTop === container.clientHeight;
+       Math.round(container.scrollHeight - container.scrollTop) === container.clientHeight;
       if (bottom && !loading && hasMore) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -45,6 +45,14 @@ export default function TableDataHost() {
       return () => container.removeEventListener("scroll", handleScroll);
     }
   }, [handleScroll]);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   return (
     <div
@@ -68,13 +76,13 @@ export default function TableDataHost() {
               <td>{item.game_name}</td>
               <td>{item.game_season}</td>
               <td>{item.game_year}</td>
-              <td>{item.game_start_date}</td>
-              <td>{item.game_end_date}</td>
+              <td>{formatDate(item.game_start_date)}</td>
+              <td>{formatDate(item.game_end_date)}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      {loading && <div>Loading...</div>}
+      {loading && <div>Chargement...</div>}
     </div>
   );
 }

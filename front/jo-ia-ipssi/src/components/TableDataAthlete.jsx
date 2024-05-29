@@ -30,7 +30,7 @@ export default function TableDataAthlete() {
     const container = tableContainerRef.current;
     if (container) {
       const bottom =
-        container.scrollHeight - container.scrollTop === container.clientHeight;
+        Math.round(container.scrollHeight - container.scrollTop) === container.clientHeight;
       if (bottom && !loading && hasMore) {
         setPage((prevPage) => prevPage + 1);
       }
@@ -67,7 +67,7 @@ export default function TableDataAthlete() {
             <tr key={index}>
               <td>{item.athlete_full_name}</td>
               <td>{item.athlete_medals}</td>
-              <td>{item.athlete_year_birth}</td>
+              <td>{Math.round(item.athlete_year_birth)}</td>
               <td>{item.first_game}</td>
               <td>{item.games_participations}</td>
               <td>
@@ -79,7 +79,7 @@ export default function TableDataAthlete() {
           ))}
         </tbody>
       </table>
-      {loading && <div className="text-center my-2">Loading...</div>}
+      {loading && <div className="text-center my-2">Chargement...</div>}
     </div>
   );
 }
