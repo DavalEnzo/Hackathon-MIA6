@@ -8,3 +8,4 @@ tensorflow
 tensorflow-intel
 uvicorn==0.30.0
 PyMySql==1.1.1
+scikit-learn
