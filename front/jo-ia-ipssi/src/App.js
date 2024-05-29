@@ -4,6 +4,7 @@ import Standings from "./pages/Standings";
 import Data from "./pages/Data";
 import AboutPage from "./pages/AboutPage";
 import PositionTorch from "./pages/PositionTorch";
+import PredictionPage from "./pages/PredictionPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/olympic-results" element={<Data />} />
         <Route path="/a-propos" element={<AboutPage />} />
         <Route path="/position-flamme" element={<PositionTorch />} />
+        <Route path="/prediction" element={<PredictionPage />} />
       </Routes>
     </BrowserRouter>
   );
