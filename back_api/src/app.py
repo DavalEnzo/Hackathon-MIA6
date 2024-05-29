@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from routes.index import athletes, db, hosts, medals, results
-
 
 app = FastAPI(
     title="Hackathon IPSSI || J.O Paris 2024",
@@ -12,6 +12,14 @@ app = FastAPI(
         "name": "Hackathon-MIA6",
         "url": "https://github.com/DavalEnzo/Hackathon-MIA6", 
     }
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/", include_in_schema=False)
