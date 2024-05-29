@@ -14,7 +14,7 @@ export default function PredictionPage() {
                     <div className="col-12 mt-5">
                         <RankingChartPrediction />
                     </div>
-
+      
                     <div className="col-12 col-md-6 mt-5">
                         <RankingPrediction />
                     </div>
