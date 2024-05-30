@@ -106,9 +106,9 @@ const AboutPage = () => {
             description: "Une bibliothèque open source pour l'apprentissage automatique en Python."
         }, 
         {
-            name: "Flask",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Flask_logo.svg",
-            description: "Un framework web léger pour Python."
+            name: "FastAPI",
+            logo: "https://cdn.worldvectorlogo.com/logos/fastapi.svg",
+            description: "Un framework web et api léger pour Python."
         }, 
         {
             name: "Leaflet",
