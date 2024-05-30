@@ -19,7 +19,7 @@ export default function TableDataMedals() {
         `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/medals/all?page=${page}&limit=20`
       );
       setData((prevData) => [...prevData, ...response.data]);
-      setHasMore(response.data.length > 0); // Assuming the API returns an empty array when there's no more data
+      setHasMore(response.data.length > 0); 
     } catch (error) {
       console.error(error);
     }

@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 function Head() {
   return (
     <>
-      <Navbar expand="sm" id="navbar" className="bg-body-white sticky-top p-0">
+      <Navbar expand="sm" id="navbar" className="bg-body-white sticky-top navbar-dark">
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="w-100" id="basic-navbar-nav">

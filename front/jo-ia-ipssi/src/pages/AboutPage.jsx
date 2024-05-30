@@ -45,7 +45,7 @@ const AboutPage = () => {
         {
             nom: 'LAAKAD',
             prenom: 'Merwan',
-            photo: 'https://media.licdn.com/dms/image/D4E03AQFY60BvhZJU_Q/profile-displayphoto-shrink_800_800/0/1706385525501?e=1722470400&v=beta&t=m7Kyf_ZIpdnqWU5HcfdIIOj3AzD7K6_URtJ6UyJE95w',
+            photo: 'https://media.licdn.com/dms/image/D4E03AQG6h8Gz5vw5UQ/profile-displayphoto-shrink_800_800/0/1716983355161?e=1722470400&v=beta&t=uPNA-NDuswkFgBNQxl_CGep7mc8wokjNX4KNraRqK3s',
             description: 'Développeur web',
             link: 'https://www.linkedin.com/in/merwan-laakad/'
         },
