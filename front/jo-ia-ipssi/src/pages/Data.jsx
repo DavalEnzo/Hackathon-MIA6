@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import PieChart from "../components/PieChart";
 import Ranking from "../components/Ranking";
+import RankingChart from "../components/RankingChart";
 import TableDataAthlete from "../components/TableDataAthlete";
 import TableDataHost from "../components/TableDataHost";
 import TableDataMedals from "../components/TableDataMedals";
@@ -12,7 +13,7 @@ export default function Data() {
       <div className="container mt-5">
         <div className="row">
           <h1 className="text-center">Jeu de données</h1>
-          <p className="text-center mt-4">
+          <p className="text-center my-4">
             Pour préparer les données en vue de l'entraînement d'un modèle, nous
             avons entrepris un processus de nettoyage méticuleux en utilisant
             les bibliothèques Pandas et PySpark. Initialement, les données
@@ -20,13 +21,26 @@ export default function Data() {
             anomalies, les valeurs manquantes et les incohérences.
           </p>
 
-          <div className="col-12 col-sm-6">
+          <div className="col-12 col-md-4">
+            <p className="text-center">
+              Classement des pays par total des médailles
+            </p>
             <Ranking />
           </div>
-          <div className="col-12 col-sm-6">
+          <div className="col-12 col-md-8">
+            <p className="text-center">Top 20 des pays par médailles</p>
+            <RankingChart />
+          </div>
+          <div className="col-12 col-md-8 mt-2">
+            <p className="text-center">
+              Nombre médailles par année aux JO
+            </p>
             <TrendChart />
           </div>
-          <div className="col-12 col-sm-5 mx-auto">
+          <div className="col-12 col-md-4 mx-auto">
+            <p className="text-center">
+              Top 10 des pays par total des médailles
+            </p>
             <PieChart />
           </div>
           <div className="col-12 mt-5">
