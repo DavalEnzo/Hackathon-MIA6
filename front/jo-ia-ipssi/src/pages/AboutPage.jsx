@@ -76,6 +76,11 @@ const AboutPage = () => {
             description: 'Un framework CSS populaire pour construire des sites web responsives et modernes.'
         },
         {
+            name: 'Font Awesome',
+            logo: 'https://static-00.iconduck.com/assets.00/font-awesome-icon-512x512-vwz08fde.png',
+            description: 'Une bibliothèque d\'icônes vectorielles et d\'outils pour les utiliser facilement sur le web.'
+        },
+        {
             name: 'PySpark',
             logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg',
             description: 'Une interface Python pour Apache Spark, un moteur de traitement de données en cluster rapide.'
@@ -96,9 +101,42 @@ const AboutPage = () => {
             description: 'Un langage de programmation interprété, interactif et orienté objet.'
         }, 
         {
-            "name": "scikit-learn",
-            "logo": "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
-            "description": "Une bibliothèque open source pour l'apprentissage automatique en Python."
+            name: "scikit-learn",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
+            description: "Une bibliothèque open source pour l'apprentissage automatique en Python."
+        }, 
+        {
+            name: "Flask",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Flask_logo.svg",
+            description: "Un framework web léger pour Python."
+        }, 
+        {
+            name: "Leaflet",
+            logo: "https://leafletjs.com/docs/images/logo.png",
+            description: "Une bibliothèque JavaScript pour les cartes interactives."
+        },
+        {
+            name: "Chart.js",
+            logo: "https://everttimberg.io/projects/chartjs/logo.png",
+            description: "Une bibliothèque JavaScript pour créer des graphiques interactifs."
+        }
+    ];
+
+    const hosts = [
+        {
+            name: 'Koyeb',
+            logo: 'https://walterbillet.com/wp-content/uploads/logo-koyeb-1.png',
+            description: 'Une plateforme de développement cloud qui permet de créer, déployer et scaler des applications en quelques minutes.'
+        },
+        {
+            name: 'Vercel',
+            logo: 'https://cdn.worldvectorlogo.com/logos/vercel.svg',
+            description: 'Une plateforme cloud pour les applications web statiques et JAMstack.'
+        },
+        {
+            name: 'Always Data',
+            logo: 'https://cdn.icon-icons.com/icons2/3911/PNG/512/alwaysdata_logo_icon_247653.png',
+            description: 'Un hébergeur web qui propose des solutions d\'hébergement mutualisé, cloud et dédié.'
         }
     ];
 
@@ -107,6 +145,15 @@ const AboutPage = () => {
 
             <div className='container mt-5'>
                 <h1 className='text-center'>À propos</h1>
+
+                <div className='row mt-5 justify-content-evenly'>
+                    <p className='fs-4'>Participants</p>
+                    {participants.map((participant, index) => (
+                        <div className='col-12 col-md-4 col-lg-2 '>
+                            <DevCard participant={participant} />
+                        </div>
+                    ))}
+                </div>
 
                 <div className="row mt-5">
                     <p className='fs-4'>Technologies Utilisées</p>
@@ -120,10 +167,10 @@ const AboutPage = () => {
                 </div>
 
                 <div className='row mt-5 justify-content-evenly'>
-                    <p className='fs-4'>Participants</p>
-                    {participants.map((participant, index) => (
+                    <p className='fs-4'>Hébergeurs</p>
+                    {hosts.map((host, index) => (
                         <div className='col-12 col-md-4 col-lg-2 '>
-                            <DevCard participant={participant} />
+                            <TechnologyCard technology={host} />
                         </div>
                     ))}
                 </div>
