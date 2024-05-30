@@ -1,7 +1,6 @@
-import Ranking from "../components/Ranking";
-import RankingChart from "../components/RankingChart";
-import TrendChart from "../components/TrendChart";
-import PieChart from "../components/PieChart";
+import RankingChartPrediction from "../components/RankingChartPrediction";
+import RankingPrediction from "../components/RankingPrediction";
+import PieChartPrediction from "../components/PieChartPrediction";
 import ParallaxComponent from "../components/ParallaxComponent";
 import Layout from "../components/Layout";
 import TextHome from "../components/TextHome";
@@ -11,32 +10,20 @@ export default function Homepage() {
     <Layout>
       <TextHome />
       <ParallaxComponent />
-      <div className="container">
-        <div className="row my-5">
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <Ranking />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
+      <div className="container mt-5">
+        <div className="row">
+          <h1 className="text-center">Prédictions JO 2024</h1>
 
-            <PieChart />
+          <div className="col-12 mt-5">
+            <RankingChartPrediction />
+          </div>
 
+          <div className="col-12 col-md-6 mt-5">
+            <RankingPrediction />
           </div>
-        </div>
-      </div>
 
-      <div className="container">
-        <div className="row my-5">
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <TrendChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
-          </div>
-          <div className="col-12 col-sm-6 col-xxl-4 mt-4">
-            <RankingChart />
+          <div className="col-12 col-md-6 mt-5">
+            <PieChartPrediction />
           </div>
         </div>
       </div>
