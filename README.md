@@ -1,4 +1,8 @@
-Prédictions JO 2024
+# Prédictions JO 2024
+
+Lien de l'API: [API](https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app)
+
+Lien Web: [Web](https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app)
 
 # Description
 Ce projet est une application web développée avec React qui affiche des prédictions pour les Jeux Olympiques de 2024. Les utilisateurs peuvent voir les prévisions des résultats pour différents sports et événements, ainsi que des analyses et des statistiques détaillées.
@@ -6,7 +10,7 @@ Ce projet est une application web développée avec React qui affiche des prédi
 Pour installer et exécuter ce projet localement, suivez ces étapes :
 
 Clonez ce dépôt sur votre machine locale :
-git clone https://github.com/DavalEnzo/Hackathon-MIA6.git](https://github.com/DavalEnzo/Hackathon-MIA6.git 
+git clone [https://github.com/DavalEnzo/Hackathon-MIA6.git](https://github.com/DavalEnzo/Hackathon-MIA6.git 
 
 ```console
 cd front/jo-ia-ipssi
@@ -27,10 +31,22 @@ npm start
 L'application sera disponible à l'adresse http://localhost:3000.
 
 # Fonctionnalités
-Affichage des prédictions pour les différents événements des JO 2024
-Statistiques et analyses
-Interface utilisateur interactive et réactive
-Recherche et filtrage des événements par an, pays, etc.
-Technologies Utilisées
-React
+- Affichage des prédictions pour les différents événements des JO 2024
+- Statistiques et analyses
+- Interface utilisateur interactive et réactive
+- Recherche et filtrage des événements par an, pays, etc.
+
+# Technologies Utilisées
+- React
+- Bootstrap
+- Font Awesome
+- Chart.js
+- PySpark
+- Pandas
+- MySQL
+- Python
+- Scikit-learn
+- FastAPI
+- Leaflet
+- Chart.js
 
