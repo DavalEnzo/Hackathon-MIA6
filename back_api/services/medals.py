@@ -242,7 +242,7 @@ async def get_medal_count_by_country(game_year: int):
     session = SessionLocal()
     try:
         query = text("""SELECT h.game_year, r.country_name, COUNT(CASE WHEN r.medal_type IN ('Gold') THEN 1 END) as medal_count_gold, 
-        COUNT(CASE WHEN r.medal_type IN ('Silver') THEN 1 END) as medal_count_gold_silver, 
+        COUNT(CASE WHEN r.medal_type IN ('Silver') THEN 1 END) as medal_count_silver, 
         COUNT(CASE WHEN r.medal_type IN ('Bronze') THEN 1 END) as medal_count_bronze 
         FROM olympic_results r 
         JOIN olympic_hosts h ON r.slug_game = h.slug_game 
