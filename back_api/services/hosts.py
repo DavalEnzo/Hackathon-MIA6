@@ -108,3 +108,20 @@ async def get_year():
         raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
     finally:
         session.close()
+
+async def get_host_country():
+    try:
+        session = SessionLocal()
+        query = text("""SELECT country_name FROM `olympic_results` GROUP BY country_name;""")
+        result = session.execute(query)
+        column_names = list(result.keys())
+        countries = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
+        return countries
+    except SQLAlchemyError as e:
+        print(f"Database error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An error occurred while fetching hosts. Please try again later.")
+    except Exception as e:
+        print(f"Unexpected error: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
+    finally:
+        session.close()
