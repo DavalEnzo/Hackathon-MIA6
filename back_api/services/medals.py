@@ -302,4 +302,24 @@ async def get_discipline_most_medals_by_country(country: str):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail="An error occurred while fetching discipline with most medals by country. Please try again later.")
     finally:
-        session.close() 
+        session.close()
+
+"""Get medal count by country and year"""
+async def get_medal_count_by_country_year(country: str):
+    session = SessionLocal()
+    try:
+        query = text("""SELECT game_year, country_name, COUNT(CASE WHEN r.medal_type IN ('Gold', 'Silver', 'Bronze') THEN 1 END) AS medal_count 
+                     FROM olympic_results r
+                     JOIN olympic_hosts ON olympic_hosts.slug_game = r.slug_game 
+                     WHERE country_name = :country
+                     GROUP BY country_name, game_year 
+                     ORDER BY game_year desc;
+        """)
+        result = session.execute(query, {"country": country})
+        column_names = list(result.keys())
+        medal_counts = [{column_names[i]: value for i, value in enumerate(row)} for row in result.fetchall()]
+        return medal_counts
+    except SQLAlchemyError as e:
+        raise HTTPException(status_code=500, detail="An error occurred while fetching medal counts by country and year. Please try again later.")
+    finally:
+        session.close()
