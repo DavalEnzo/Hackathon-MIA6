@@ -50,7 +50,7 @@ async def get_medals_by_discipline(discipline_title: str):
         raise HTTPException(status_code=500, detail=str(e))
     
 """Route Get medals count by country"""
-@medals.get("/count_by_country")
+@medals.get("/count_by_country/{year}")
 async def get_medals_count_by_country(year: int):
     medals_list = await get_medal_count_by_country(year)
     try:
