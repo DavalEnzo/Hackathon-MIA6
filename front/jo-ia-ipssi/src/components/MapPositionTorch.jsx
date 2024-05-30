@@ -14,7 +14,7 @@ export default function MapPositionTorch() {
     useEffect(() => {
         const fetchData = async () => {
             setLoadingData(true);
-            const limit = 20; // Set limit for each request
+            const limit = 20;
             const totalRows = 4000;
             const numRequests = Math.ceil(totalRows / limit);
             let allData = [];
@@ -58,14 +58,14 @@ export default function MapPositionTorch() {
 
 
     const startIcon = new L.Icon({
-        iconUrl: 'https://cdn-icons-png.freepik.com/512/495/495468.png', // Icon for the starting point
+        iconUrl: 'https://cdn-icons-png.freepik.com/512/495/495468.png', 
         iconSize: [50, 50],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32],
     });
 
     const endIcon = new L.Icon({
-        iconUrl: 'https://cdn-icons-png.flaticon.com/512/1978/1978812.png', // Icon for the ending point
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/1978/1978812.png',
         iconSize: [50, 50],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32],

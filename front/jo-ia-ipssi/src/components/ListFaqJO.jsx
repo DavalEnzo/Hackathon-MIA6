@@ -33,7 +33,7 @@ export default function ListFaqJO() {
             }
         }
     }, [loading, hasMore]);
-console.log(Math.round(window.innerHeight + document.documentElement.scrollTop), document.documentElement.offsetHeight)
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);

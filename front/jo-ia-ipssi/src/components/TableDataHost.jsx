@@ -18,7 +18,6 @@ export default function TableDataHost() {
       const response = await axios.get(
         `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts/all?page=${page}&limit=20`
       );
-      console.log(page)
       setData((prevData) => [...prevData, ...response.data]);
       setHasMore(response.data.length > 0); 
     } catch (error) {
@@ -49,7 +48,7 @@ export default function TableDataHost() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
