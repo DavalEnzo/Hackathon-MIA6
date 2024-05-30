@@ -8,9 +8,11 @@ Pour installer et exécuter ce projet localement, suivez ces étapes :
 Clonez ce dépôt sur votre machine locale :
 git clone https://github.com/DavalEnzo/Hackathon-MIA6.git](https://github.com/DavalEnzo/Hackathon-MIA6.git 
 
+```console
 cd front/jo-ia-ipssi
 
 npm install
+```
 
 # Utilisation
 Pour démarrer l'application, utilisez la commande suivante :
