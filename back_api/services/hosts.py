@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import HTTPException
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
-
 from config.db import SessionLocal
 
 hosts = APIRouter()
@@ -61,6 +60,7 @@ async def get_host_slug(slug: str):
     finally:
         session.close()
 
+"""Get host by season"""
 async def get_host_season(season: str):
     try:
         session = SessionLocal()
@@ -78,6 +78,7 @@ async def get_host_season(season: str):
     finally:
         session.close()
 
+"""Get host by year"""
 async def get_host_year(year: int):
     try:
         session = SessionLocal()

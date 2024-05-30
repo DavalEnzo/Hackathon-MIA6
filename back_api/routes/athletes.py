@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
-
 from services.athletes import f_athletes, get_all, get_athlete_id, get_athlete_name, top_10_athletes_by_year
 
 athletes = APIRouter()

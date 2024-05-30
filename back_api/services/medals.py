@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-from config.db import engine, SessionLocal
+from fastapi import HTTPException
+from config.db import SessionLocal
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -260,7 +260,7 @@ async def get_medal_count_by_country():
     finally:
         session.close()
 
-"""get medal count by athlete"""
+"""Get medal count by athlete"""
 async def get_medal_count_by_athlete():
         session = SessionLocal()
         try:

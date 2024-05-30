@@ -1,6 +1,4 @@
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import JSONResponse
-
 from services.hosts import get_all, get_host, get_host_slug, get_host_season, get_host_year
 
 hosts = APIRouter()
@@ -31,7 +29,8 @@ async def get_host_slug(slug: str):
         return host
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
+    
+"""Route Get host by season"""
 @hosts.get("/season/{season}")
 async def read_host_season(season: str):
     host = await get_host_season(season)
@@ -40,6 +39,7 @@ async def read_host_season(season: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+""""""
 @hosts.get("/year/{year}")
 async def read_host_year(year: int):
     host = await get_host_year(year)

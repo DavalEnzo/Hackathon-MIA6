@@ -1,4 +1,4 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter
 from config.db import check_db_connection
 
 db = APIRouter()
@@ -8,5 +8,3 @@ def root():
         return {"message": "Database connection established successfully"}
     else:
         return {"message": "Failed to establish database connection"}
-    
-

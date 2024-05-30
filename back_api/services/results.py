@@ -1,15 +1,14 @@
-from fastapi import APIRouter, HTTPException
-from config.db import engine, SessionLocal
+from fastapi import HTTPException
+from config.db import SessionLocal
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from decimal import Decimal
 
-
+"""Convert decimal to float"""
 def decimal_to_float(value):
     if isinstance(value, Decimal):
         return float(value)
     return value
-
 
 """To 10 contries by year"""
 async def top_10_countries_by_year(year: int):
@@ -124,7 +123,6 @@ async def top_10_athletes_by_country(game_year: int, country_name: str):
         raise HTTPException(status_code=500, detail="An unexpected error occurred. Please try again later.")
     finally:
         session.close()
-        
 
 """Get best comtries by discipline and year"""
 async def get_best_countries_by_dis_year(game_year: int):
