@@ -248,7 +248,7 @@ async def get_medal_count_by_country(game_year: int):
         JOIN olympic_hosts h ON r.slug_game = h.slug_game 
         WHERE h.game_year = :game_year
         GROUP BY h.game_year, r.country_name 
-        ORDER BY h.game_year, r.country_name;
+        ORDER BY medal_count_gold DESC
     """)
         result = session.execute(query, {"game_year": game_year})
         column_names = list(result.keys())
