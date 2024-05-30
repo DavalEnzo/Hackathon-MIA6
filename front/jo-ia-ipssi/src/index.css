@@ -33,3 +33,9 @@ body {
 .navbar-toggler-icon {
   color: white!important;
 }
+
+.countdown-card {
+  background-color: rgba(232, 232, 237, 0.7)!important;
+  border-radius: 6rem!important;
+  backdrop-filter: blur(3px)!important;
+}
