@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,9 +10,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 ChartJS.register(
-    
   CategoryScale,
   LinearScale,
   PointElement,
@@ -23,55 +25,64 @@ ChartJS.register(
 );
 
 const TrendChart = () => {
-  const medalData = {
-    USA: {
-      labels: ["2008", "2012", "2016", "2020", "2024"],
-      datasets: [
-        {
-          label: "USA",
-          data: [110, 104, 121, 113, 120],
-          borderColor: "rgba(75, 192, 192, 1)",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-        },
-      ],
-    },
-    China: {
-      labels: ["2008", "2012", "2016", "2020", "2024"],
-      datasets: [
-        {
-          label: "China",
-          data: [100, 88, 70, 89, 90],
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-        },
-      ],
-    },
-    Russia: {
-      labels: ["2008", "2012", "2016", "2020", "2024"],
-      datasets: [
-        {
-          label: "Russia",
-          data: [72, 82, 56, 71, 75],
-          borderColor: "rgba(54, 162, 235, 1)",
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-        },
-      ],
-    },
-    UK: {
-      labels: ["2008", "2012", "2016", "2020", "2024"],
-      datasets: [
-        {
-          label: "UK",
-          data: [47, 65, 67, 65, 70],
-          borderColor: "rgba(255, 206, 86, 1)",
-          backgroundColor: "rgba(255, 206, 86, 0.2)",
-        },
-      ],
-    },
-  };
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("France");
+  const [chartData, setChartData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [selectedCountry, setSelectedCountry] = useState("USA");
-  const data = medalData[selectedCountry];
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          "https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts/countries"
+        );
+        setCountries(response.data);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/medals/count/country/${selectedCountry}`
+        );
+        const data = response.data;
+
+        const labels = data.map((item) => item.game_year);
+        const medalCounts = data.map((item) => item.medal_count);
+
+        const formattedData = {
+          labels,
+          datasets: [
+            {
+              label: selectedCountry,
+              data: medalCounts,
+              fill: false,
+              backgroundColor: "rgba(75, 192, 192, 0.6)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        };
+
+        setChartData(formattedData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    if (selectedCountry) {
+      fetchData();
+    }
+  }, [selectedCountry]);
 
   const options = {
     responsive: true,
@@ -79,21 +90,27 @@ const TrendChart = () => {
       legend: {
         position: "top",
       },
-      title: {
-        display: true,
-        text: `Olympics Total Medals Trend (${selectedCountry})`,
-      },
     },
     scales: {
       y: {
         beginAtZero: true,
       },
     },
-    // Ajoutez cette propriété pour changer la police de caractères
     font: {
-      family: "Paris2024-Variable", // Remplacez 'Arial' par la police de votre choix
+      family: "Paris2024-Variable",
     },
   };
+
+  if (loading) {
+    return (
+      <div className="mt-5 text-center">
+        <p>
+          <FontAwesomeIcon className="fs-2" icon={faSpinner} spin />
+        </p>
+        <p>Chargement...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -103,13 +120,14 @@ const TrendChart = () => {
           value={selectedCountry}
           onChange={(e) => setSelectedCountry(e.target.value)}
         >
-          <option value="USA">USA</option>
-          <option value="China">China</option>
-          <option value="Russia">Russia</option>
-          <option value="UK">UK</option>
+          {countries.map((country) => (
+            <option key={country.country_name} value={country.country_name}>
+              {country.country_name}
+            </option>
+          ))}
         </select>
       </div>
-      <Line data={data} options={options} />
+      {chartData && <Line data={chartData} options={options} />}
     </div>
   );
 };

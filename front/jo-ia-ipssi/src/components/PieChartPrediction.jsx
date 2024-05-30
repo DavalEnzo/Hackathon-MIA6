@@ -7,7 +7,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
+const PieChartPrediction = () => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [chartData, setChartData] = useState(null);
@@ -101,4 +101,4 @@ const PieChart = () => {
   );
 };
 
-export default PieChart;
+export default PieChartPrediction;

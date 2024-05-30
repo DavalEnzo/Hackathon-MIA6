@@ -22,16 +22,33 @@ ChartJS.register(
   Legend
 );
 
-const RankingChartPrediction = () => {
+const RankingChart = () => {
   const [chartData, setChartData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedYear, setSelectedYear] = useState("2020");
+  const [years, setYears] = useState([]);
+
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        const response = await axios.get(
+          "https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/hosts/allYears"
+        );
+        setYears(response.data);
+      } catch (error) {
+        console.error("Error fetching years:", error);
+      }
+    };
+
+    fetchYears();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/prediction/"
+          `https://hackathon-mia-hackathon-mia-1a3ee907.koyeb.app/medals/count_by_country/${selectedYear}`
         );
         const data = response.data;
         const sortedData = data.sort(
@@ -41,10 +58,10 @@ const RankingChartPrediction = () => {
 
         const top20 = sortedData.slice(0, 20);
 
-        const labels = top20.map((item) => item.country);
-        const goldData = top20.map((item) => item.gold);
-        const silverData = top20.map((item) => item.silver);
-        const bronzeData = top20.map((item) => item.bronze);
+        const labels = top20.map((item) => item.country_name);
+        const goldData = top20.map((item) => item.medal_count_gold);
+        const silverData = top20.map((item) => item.medal_count_silver);
+        const bronzeData = top20.map((item) => item.medal_count_bronze);
 
         const formattedData = {
           labels,
@@ -82,7 +99,7 @@ const RankingChartPrediction = () => {
     };
 
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   if (loading) {
     return (
@@ -106,12 +123,22 @@ const RankingChartPrediction = () => {
 
   return (
     <div>
-      <p className="text-center fs-3">
-        Top 20 des pays par médailles aux JO de Paris 2024
-      </p>
+      <div className="text-center mb-3">
+        <select
+          className="form-select"
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+        >
+          {years.map((year) => (
+            <option key={year.game_year} value={year.game_year}>
+              {year.game_year}
+            </option>
+          ))}
+        </select>
+      </div>
       {chartData && <Bar data={chartData} options={options} />}
     </div>
   );
 };
 
-export default RankingChartPrediction;
+export default RankingChart;
